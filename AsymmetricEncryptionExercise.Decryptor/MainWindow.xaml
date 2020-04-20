@@ -1,0 +1,105 @@
+﻿<Window x:Class="AsymmetricEncryptionExercise.Decryptor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AsymmetricEncryptionExercise.Decryptor"
+        xmlns:AE="clr-namespace:AsymmetricEncryptionExercise.Decryptor"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="250">
+    <Window.DataContext>
+        <AE:AEReceiverViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="{x:Type Control}" x:Key="baseSize">
+            <Setter Property="FontSize" Value="11"/>
+        </Style>
+        <Style TargetType="{x:Type Control}" x:Key="small">
+            <Setter Property="FontSize" Value="6"/>
+        </Style>
+
+        <Style TargetType="TextBox" BasedOn="{StaticResource baseSize}" />
+        <Style TargetType="Label" BasedOn="{StaticResource baseSize}"/>
+        <Style TargetType="Button" BasedOn="{StaticResource baseSize}"/>
+    </Window.Resources>
+    <StackPanel>
+        <DockPanel LastChildFill="True" Margin="20,10,5,5">
+            <Label HorizontalAlignment="Left" Width="75" Content="File:"></Label>
+        </DockPanel>
+
+        <StackPanel Margin="20,10,5,5">
+            <TextBox x:Name="fileTextBox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding FileChoice}" FontSize="9"></TextBox>
+            <Button x:Name="fileButton" Content="Choose File" HorizontalAlignment="Left" Margin="0,5,0,0" FontSize="9" Command="{Binding ChooseFileCommand}" />
+        </StackPanel>
+
+        <DockPanel LastChildFill="True" Margin="20,10,5,5">
+            <Label HorizontalAlignment="Left" Width="75" Content="Public Data:"></Label>
+        </DockPanel>
+
+        <DockPanel LastChildFill="True" Margin="20,5,20,5">
+            <Label HorizontalAlignment="Left" Width="60" Content="Exponent:" FontSize="9"></Label>
+            <TextBox x:Name="exponentTextbox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding Exponent}" FontSize="9"></TextBox>
+        </DockPanel>
+
+        <DockPanel LastChildFill="True" Margin="20,5,20,5">
+            <Label HorizontalAlignment="Left" Width="60" Content="Modulus:" FontSize="9"></Label>
+            <TextBox x:Name="modulusTextbox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding Modulus}" FontSize="9"></TextBox>
+        </DockPanel>
+        
+        <!-- Begin Private Data -->
+        <Border BorderBrush="Black" BorderThickness="2" Width="230">
+            <Grid Width="230">
+                <StackPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="0" LastChildFill="True" Margin="20,10,5,5">
+                        <Label HorizontalAlignment="Left" Width="75" Content="Private Data:"></Label>
+                    </DockPanel>
+
+                    <DockPanel LastChildFill="True" Margin="20,5,20,5">
+                        <Label HorizontalAlignment="Left" Width="60" Content="D:" FontSize="9"></Label>
+                        <TextBox x:Name="DTextBox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding D}" FontSize="9"></TextBox>
+                    </DockPanel>
+
+                    <DockPanel LastChildFill="True" Margin="20,5,20,5">
+                        <Label HorizontalAlignment="Left" Width="60" Content="DP:" FontSize="9"></Label>
+                        <TextBox x:Name="DPTextBox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding DP}" FontSize="9"></TextBox>
+                    </DockPanel>
+
+                    <DockPanel LastChildFill="True" Margin="20,5,20,5">
+                        <Label HorizontalAlignment="Left" Width="60" Content="DQ:" FontSize="9"></Label>
+                        <TextBox x:Name="DQTextBox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding DQ}" FontSize="9"></TextBox>
+                    </DockPanel>
+
+                    <DockPanel LastChildFill="True" Margin="20,5,20,5">
+                        <Label HorizontalAlignment="Left" Width="60" Content="Inverse Q:" FontSize="9"></Label>
+                        <TextBox x:Name="inverseQTextBox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding InverseQ}" FontSize="9"></TextBox>
+                    </DockPanel>
+
+                    <DockPanel LastChildFill="True" Margin="20,5,20,5">
+                        <Label HorizontalAlignment="Left" Width="60" Content="P:" FontSize="9"></Label>
+                        <TextBox x:Name="PTextBox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding P}" FontSize="9"></TextBox>
+                    </DockPanel>
+
+                    <DockPanel LastChildFill="True" Margin="20,5,20,5">
+                        <Label HorizontalAlignment="Left" Width="60" Content="Q:" FontSize="9"></Label>
+                        <TextBox x:Name="QTextBox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding Q}" FontSize="9"></TextBox>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- End private data-->
+
+        <DockPanel LastChildFill="True" Margin="20,20,20,15">
+            <Label HorizontalAlignment="Left" Width="70" Content="Cipherbytes:"></Label>
+            <TextBox x:Name="ciperbytesTextbox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding CipherBytes}"></TextBox>
+        </DockPanel>
+
+        <Button x:Name="decryptButton" Content="{Binding DencryptButtonText, Mode=OneWay}" HorizontalAlignment="Center" Padding="4,4,4,4" Command="{Binding DecryptCommand}"/>
+
+        <DockPanel LastChildFill="True" Margin="20,15,20,5">
+            <Label HorizontalAlignment="Left" Width="60" Content="Plaintext:"></Label>
+            <TextBox x:Name="plaintextTextbox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding PlainText, Mode=TwoWay}"></TextBox>
+        </DockPanel>
+
+    </StackPanel>
+</Window>
