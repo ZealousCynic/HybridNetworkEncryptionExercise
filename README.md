@@ -5,7 +5,7 @@
 #Keys saved to:
 
 #./AsymmetricEncryption.Decryptor/bin/debug/private/privatekey.xml
-#./AsymmetricEncryption.Decryptor/bin/debug/public/publickey.xml
+#./AsymmetricEncryption.Decryptor/bin/debug/public/publickey.xml \n
 #./public/publickey.xml
 
 #Programs designed to read/write encryption/decryption to and from .txt files.
