@@ -15,6 +15,12 @@ namespace AsymmetricEncryptionExercise.Decryptor
     {
         RSAXML rsaxml;
 
+        bool manual = false;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #region STRINGS
+
         string fileChoice = "";
         string fileName = "Encrypted.txt";
 
@@ -29,9 +35,10 @@ namespace AsymmetricEncryptionExercise.Decryptor
 
         string baseDirectory;
 
-        bool manual = false;
+        #endregion
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        #region COMMANDS
+
         ICommand decryptCommand;
         ICommand showKeyCommand;
         ICommand chooseFileCommand;
@@ -41,6 +48,8 @@ namespace AsymmetricEncryptionExercise.Decryptor
         public ICommand ShowKeyCommand { get { return showKeyCommand; } }
         public ICommand ChooseFileCommand { get { return chooseFileCommand; } }
         public ICommand GenerateKeysCommand { get { return generateKeysCommand; } }
+
+        #endregion
 
         #region PROPERTIES
 

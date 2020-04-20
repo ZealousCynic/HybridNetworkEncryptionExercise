@@ -15,8 +15,12 @@ namespace AsymmetricEncryptionExercise.Encryptor
     {
         RSAXML rsaxml;
 
-        ICommand encryptCommand;
-        ICommand chooseFileCommand;
+        bool manual = false;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #region STRINGS
+
         string encryptButtonText = "Encrypt";
         string plainText = "";
         string exponent = "";
@@ -27,13 +31,18 @@ namespace AsymmetricEncryptionExercise.Encryptor
         string fileName = "Encrypted.txt";
         string baseDirectory;
 
-        bool manual = false;
+        #endregion
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        #region COMMANDS 
 
-        #region PROPERTIES
+        ICommand encryptCommand;
+        ICommand chooseFileCommand;
         public ICommand EncryptCommand { get { return encryptCommand; } }
         public ICommand ChooseFileCommand { get { return chooseFileCommand; } }
+
+        #endregion
+
+        #region PROPERTIES
 
         public bool Manual
         {
@@ -185,7 +194,7 @@ namespace AsymmetricEncryptionExercise.Encryptor
         }
 
         //If this is called, don't use the result in manual key encryption -- Key is reformatted and extra -'s inserted.
-        string BuildHexString(byte[] src) 
+        string BuildHexString(byte[] src)
         {
             StringBuilder sb = new StringBuilder(src.Length * 2);
             for (int i = 0; i < src.Length; i++)
