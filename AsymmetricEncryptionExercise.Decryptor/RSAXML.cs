@@ -24,8 +24,6 @@ namespace AsymmetricEncryptionExercise.Decryptor
         string[] filepaths;
         string[] dirpaths;
 
-
-        RSAParameters _pubKey;
         RSAParameters _priKey;
 
         public byte[] Modulus { get { return _priKey.Modulus; } }
@@ -63,7 +61,6 @@ namespace AsymmetricEncryptionExercise.Decryptor
             {
                 rsa.PersistKeyInCsp = false;
 
-                rsa.ImportParameters(_pubKey);
                 rsa.ImportParameters(_priKey);
 
                 return rsa.Decrypt(data, true);
@@ -84,7 +81,6 @@ namespace AsymmetricEncryptionExercise.Decryptor
                 File.WriteAllText(baseDirectory + path + pubpath + pubname, rsa.ToXmlString(false));
                 File.WriteAllText(path + pripath + priname, rsa.ToXmlString(true));
 
-                _pubKey = rsa.ExportParameters(false);
                 _priKey = rsa.ExportParameters(true);
             }
         }
@@ -115,11 +111,7 @@ namespace AsymmetricEncryptionExercise.Decryptor
                 rsa.PersistKeyInCsp = false;
 
                 //Set program local parameters rather than constantly reading from file
-                string xml = File.ReadAllText(path + pubpath + pubname);
-                rsa.FromXmlString(xml);
-                _pubKey = rsa.ExportParameters(false);
-
-                xml = File.ReadAllText(path + pripath + priname);
+                string xml = File.ReadAllText(path + pripath + priname);
                 rsa.FromXmlString(xml);
                 _priKey = rsa.ExportParameters(true);
             }
