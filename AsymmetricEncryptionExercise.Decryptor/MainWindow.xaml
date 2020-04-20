@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AsymmetricEncryptionExercise.Decryptor"
         xmlns:AE="clr-namespace:AsymmetricEncryptionExercise.Decryptor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="250">
+        Title="MainWindow" Height="700" Width="250">
     <Window.DataContext>
         <AE:AEReceiverViewModel/>
     </Window.DataContext>
@@ -31,6 +31,11 @@
             <TextBox x:Name="fileTextBox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding FileChoice}" FontSize="9"></TextBox>
             <Button x:Name="fileButton" Content="Choose File" HorizontalAlignment="Left" Margin="0,5,0,0" FontSize="9" Command="{Binding ChooseFileCommand}" />
         </StackPanel>
+
+        <DockPanel LastChildFill="True" Margin="20,0,0,0">
+            <Label HorizontalAlignment="Left" Width="75" Content="Raw Key data:"></Label>
+            <CheckBox x:Name="manualKeyInsert" Margin="0,5,0,0" IsChecked="{Binding Manual, Mode=TwoWay}"/>
+        </DockPanel>
 
         <DockPanel LastChildFill="True" Margin="20,10,5,5">
             <Label HorizontalAlignment="Left" Width="75" Content="Public Data:"></Label>
@@ -94,12 +99,17 @@
             <TextBox x:Name="ciperbytesTextbox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding CipherBytes}"></TextBox>
         </DockPanel>
 
-        <Button x:Name="decryptButton" Content="{Binding DencryptButtonText, Mode=OneWay}" HorizontalAlignment="Center" Padding="4,4,4,4" Command="{Binding DecryptCommand}"/>
+        <DockPanel LastChildFill="True">
+            <Button x:Name="showKey" Content="Show key" HorizontalAlignment="Left" Margin="20,0,0,0" Padding="4,4,4,4" Command="{Binding ShowKeyCommand}"/>
+            <Button x:Name="decryptButton" Content="{Binding DecryptButtonText, Mode=OneWay}" HorizontalAlignment="Left" Margin="20,0,0,0" Padding="4,4,4,4" Command="{Binding DecryptCommand}"/>
+        </DockPanel>
 
         <DockPanel LastChildFill="True" Margin="20,15,20,5">
             <Label HorizontalAlignment="Left" Width="60" Content="Plaintext:"></Label>
             <TextBox x:Name="plaintextTextbox" HorizontalAlignment="Stretch" BorderBrush="Black" Text="{Binding PlainText, Mode=TwoWay}"></TextBox>
         </DockPanel>
+
+        <Button x:Name="newKeysButton" Content="{Binding NewKeys, Mode=OneWay}" HorizontalAlignment="Center" Margin="0,25,0,0" Padding="4,4,4,4" Command="{Binding GenerateKeysCommand}"/>
 
     </StackPanel>
 </Window>

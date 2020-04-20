@@ -27,11 +27,23 @@ namespace AsymmetricEncryptionExercise.Encryptor
         string fileName = "Encrypted.txt";
         string baseDirectory;
 
+        bool manual = false;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         #region PROPERTIES
         public ICommand EncryptCommand { get { return encryptCommand; } }
         public ICommand ChooseFileCommand { get { return chooseFileCommand; } }
+
+        public bool Manual
+        {
+            get { return manual; }
+            set
+            {
+                manual = value;
+                OnPropertyChanged("Manual");
+            }
+        }
 
         public string FileChoice
         {
@@ -111,10 +123,18 @@ namespace AsymmetricEncryptionExercise.Encryptor
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
-        public void Encrypt(object obj)
+        void Encrypt(object obj)
         {
             EncryptButtonText = "Working...";
 
+            if (Manual)
+                ManualKeyData();
+            else
+                AutomaticKeyData();
+        }
+
+        void AutomaticKeyData()
+        {
             rsaxml = new RSAXML();
             Printer printer = new Printer();
 
@@ -128,14 +148,29 @@ namespace AsymmetricEncryptionExercise.Encryptor
             CipherBytes = Convert.ToBase64String(encrypted);
 
             Modulus = BuildHexString(rsaxml.Modulus);
-            Exponent = BuildHexString(rsaxml.Exponent);            
+            Exponent = BuildHexString(rsaxml.Exponent);
 
             printer.SaveToFile(CipherBytes, fileName);
 
             EncryptButtonText = "Success!";
         }
 
-        public void ChooseFile(object obj)
+        void ManualKeyData()
+        {
+            byte[] modulus = Encoding.ASCII.GetBytes(Modulus);
+            byte[] exponent = Encoding.ASCII.GetBytes(Exponent);
+            byte[] toEncrypt = Encoding.ASCII.GetBytes(PlainText);
+
+            rsaxml = new RSAXML(modulus, exponent);
+
+            byte[] encrypted = rsaxml.Encrypt(toEncrypt);
+
+            CipherBytes = Convert.ToBase64String(encrypted);
+
+            EncryptButtonText = "Success!";
+        }
+
+        void ChooseFile(object obj)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
@@ -149,6 +184,7 @@ namespace AsymmetricEncryptionExercise.Encryptor
             }
         }
 
+        //If this is called, don't use the result in manual key encryption -- Key is reformatted and extra -'s inserted.
         string BuildHexString(byte[] src) 
         {
             StringBuilder sb = new StringBuilder(src.Length * 2);

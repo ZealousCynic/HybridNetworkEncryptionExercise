@@ -42,7 +42,14 @@ namespace AsymmetricEncryptionExercise.Encryptor
                 path + pubpath + pubname,
             };
 
-            GetKey(baseDirectory + path);
+            if (Modulus is null) //Dumb check because I added the option to manually insert public key data later
+                GetKey(baseDirectory + path);
+        }
+
+        public RSAXML(byte[] modulus, byte[] exponent, string path = ".") : this(path)
+        {
+            _pubKey.Modulus = modulus;
+            _pubKey.Exponent = exponent;
         }
 
 

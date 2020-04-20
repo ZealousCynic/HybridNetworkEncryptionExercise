@@ -67,7 +67,7 @@ namespace AsymmetricEncryptionExercise.Decryptor
             }
         }
 
-        void GenerateKeyToXML(string path)
+        public void GenerateKeyToXML(string path)
         {
             using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(BITLENGTH))
             {

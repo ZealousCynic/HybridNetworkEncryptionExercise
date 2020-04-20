@@ -13,6 +13,8 @@ namespace AsymmetricEncryptionExercise.Decryptor
 {
     class AEReceiverViewModel : INotifyPropertyChanged
     {
+        RSAXML rsaxml;
+
         string fileChoice = "";
         string fileName = "Encrypted.txt";
 
@@ -21,19 +23,46 @@ namespace AsymmetricEncryptionExercise.Decryptor
         string exponent = "";
         string modulus = "";
         string cipherbytes = "";
+        string newKeys = "Generate New Keypair";
 
         string d, dp, dq, p, q, inverseq;
 
         string baseDirectory;
 
+        bool manual = false;
+
         public event PropertyChangedEventHandler PropertyChanged;
         ICommand decryptCommand;
+        ICommand showKeyCommand;
         ICommand chooseFileCommand;
+        ICommand generateKeysCommand;
 
         public ICommand DecryptCommand { get { return decryptCommand; } }
+        public ICommand ShowKeyCommand { get { return showKeyCommand; } }
         public ICommand ChooseFileCommand { get { return chooseFileCommand; } }
+        public ICommand GenerateKeysCommand { get { return generateKeysCommand; } }
 
         #region PROPERTIES
+
+        public bool Manual
+        {
+            get { return manual; }
+            set
+            {
+                manual = value;
+                OnPropertyChanged("Manual");
+            }
+        }
+
+        public string NewKeys
+        {
+            get { return newKeys; }
+            set
+            {
+                newKeys = value;
+                OnPropertyChanged("NewKeys");
+            }
+        }
 
         public string FileChoice
         {
@@ -45,7 +74,7 @@ namespace AsymmetricEncryptionExercise.Decryptor
             }
         }
 
-        public string DencryptButtonText
+        public string DecryptButtonText
         {
             get { return decryptButtonText; }
             set
@@ -162,6 +191,8 @@ namespace AsymmetricEncryptionExercise.Decryptor
         {
             decryptCommand = new DelegateCommand(Decrypt);
             chooseFileCommand = new DelegateCommand(ChooseFile);
+            generateKeysCommand = new DelegateCommand(GenerateKeys);
+            showKeyCommand = new DelegateCommand(ShowKey);
 
             baseDirectory = BaseDirectory.GetBaseDirectory();
 
@@ -173,9 +204,12 @@ namespace AsymmetricEncryptionExercise.Decryptor
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
-        public void Decrypt(object obj)
+        void Decrypt(object obj)
         {
-            RSAXML rsaxml = new RSAXML();
+            if (rsaxml is null)
+                rsaxml = new RSAXML();
+
+            ShowKey(obj);
 
             CipherBytes = "Done";
 
@@ -185,18 +219,9 @@ namespace AsymmetricEncryptionExercise.Decryptor
             byte[] decrypted = rsaxml.Decrypt(toDecrypt);
 
             PlainText = Encoding.ASCII.GetString(decrypted);
-            Modulus = BuildHexString(rsaxml.Modulus);
-            Exponent = BuildHexString(rsaxml.Exponent);
-
-            P = BuildHexString(rsaxml.P);
-            Q = BuildHexString(rsaxml.Q);
-            D = BuildHexString(rsaxml.D);
-            DP = BuildHexString(rsaxml.DP);
-            DQ = BuildHexString(rsaxml.DQ);
-            InverseQ = BuildHexString(rsaxml.InverseQ);
         }
 
-        public void ChooseFile(object obj)
+        void ChooseFile(object obj)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
@@ -208,6 +233,42 @@ namespace AsymmetricEncryptionExercise.Decryptor
                 FileChoice = ofd.FileName;
                 fileName = ofd.SafeFileName;
             }
+        }
+
+        void GenerateKeys(object obj)
+        {
+            NewKeys = "Working...";
+
+            if (rsaxml is null)
+                rsaxml = new RSAXML();
+
+            rsaxml.GenerateKeyToXML(".");
+
+            NewKeys = "Success";
+        }
+
+        void ShowKey(object obj)
+        {
+            if (rsaxml is null)
+                rsaxml = new RSAXML();
+
+            if (Manual)
+            {
+                Modulus = Convert.ToBase64String(rsaxml.Modulus);
+                Exponent = Convert.ToBase64String(rsaxml.Exponent);
+            }
+            else
+            {
+                Modulus = BuildHexString(rsaxml.Modulus);
+                Exponent = BuildHexString(rsaxml.Exponent);
+            }
+
+            P = BuildHexString(rsaxml.P);
+            Q = BuildHexString(rsaxml.Q);
+            D = BuildHexString(rsaxml.D);
+            DP = BuildHexString(rsaxml.DP);
+            DQ = BuildHexString(rsaxml.DQ);
+            InverseQ = BuildHexString(rsaxml.InverseQ);
         }
 
         string BuildHexString(byte[] src)
