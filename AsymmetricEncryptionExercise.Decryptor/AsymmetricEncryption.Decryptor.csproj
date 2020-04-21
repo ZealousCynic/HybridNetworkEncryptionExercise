@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonClasses">
-      <HintPath>..\CommonClasses.dll</HintPath>
+      <HintPath>..\..\CommonClasses\CommonClasses\bin\Release\netstandard2.0\CommonClasses.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

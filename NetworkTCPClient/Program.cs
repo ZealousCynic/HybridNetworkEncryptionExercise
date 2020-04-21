@@ -25,7 +25,9 @@ namespace NetworkTCPClient
                     Environment.Exit(0);
                 }
 
-                client.Connect(message);
+                client.SendMessage(message);
+                Console.WriteLine(client.GetResponse());
+                client.Disconnect();
             }
         }
     }

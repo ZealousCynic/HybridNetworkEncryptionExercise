@@ -35,8 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonClasses">
-      <HintPath>..\CommonClasses.dll</HintPath>
+    <Reference Include="CommonClasses, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CommonClasses\CommonClasses\bin\Release\netstandard2.0\CommonClasses.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

@@ -10,33 +10,28 @@ namespace NetworkTCPClient
 {
     class NetworkTCPClient
     {
-        const Int32 PORTNR = 5000;
-        const string SERVERIP = "127.0.0.1";
+        Int32 PORTNR = 5000;
+        string SERVERIP = "127.0.0.1";
         TcpClient client;
         NetworkStream stream;
+        byte[] toSend;
+        byte[] received;
 
-        public void Connect(string message)
+        public NetworkTCPClient() { }
+
+        public NetworkTCPClient(int portNr, string serverIP) { PORTNR = portNr; SERVERIP = serverIP; }
+
+        public void SendMessage(string message)
         {
             try
             {
-                string response = null;
-
                 client = new TcpClient(SERVERIP, PORTNR);
 
-                byte[] data = Encoding.ASCII.GetBytes(message);
+                toSend = Encoding.ASCII.GetBytes(message);
 
                 stream = client.GetStream();
 
-                stream.Write(data, 0, data.Length);
-
-                Console.WriteLine("Sent: {0}", message);
-
-                data = new byte[256];
-
-                Int32 receivedBytes = stream.Read(data, 0, data.Length);
-                response = Encoding.ASCII.GetString(data);
-
-                Console.WriteLine("Received: {0}", response);
+                stream.Write(toSend, 0, toSend.Length);
             }
             catch (ArgumentNullException e)
             {
@@ -46,9 +41,40 @@ namespace NetworkTCPClient
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
-            finally
+        }
+
+        public string GetResponse()
+        {
+            string response = null;
+
+            try
             {
-                stream.Close();
+                if (client is null || client.Connected != true || stream is null || stream.DataAvailable != true)
+                    return "Client is not connected!";
+
+                received = new byte[256];
+
+                Int32 receivedBytes = stream.Read(received, 0, received.Length);
+                response = Encoding.ASCII.GetString(received);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("ArgumentNullException: {0}", e);
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine("SocketException: {0}", e);
+            }
+
+            return response;
+        }
+
+        public void Disconnect()
+        {
+            if (client != null || client.Connected == true)
+            {
+                if (!(stream is null))
+                    stream.Close();
                 client.Close();
             }
         }
