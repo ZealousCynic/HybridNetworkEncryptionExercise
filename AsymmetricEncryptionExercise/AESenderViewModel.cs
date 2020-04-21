@@ -1,4 +1,5 @@
 ﻿using CommonClasses;
+using CommonClasses.Wpf;
 using Microsoft.Win32;
 using System;
 using System.ComponentModel;
