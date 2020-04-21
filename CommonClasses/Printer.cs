@@ -1,14 +1,13 @@
-﻿using BaseDirectory;
-using System.IO;
+﻿using System.IO;
 
-namespace AsymmetricEncryptionExercise.Encryptor
+namespace CommonClasses
 {
-    class Printer
+    public class Printer
     {
         string baseDirectory = "";
         public Printer()
         {
-            baseDirectory = Base.GetBaseDirectoryWinFormat();
+            baseDirectory = BaseDirectory.GetBaseDirectoryWinFormat();
         }
         public void SaveToFile(string data, string name, string path = "./")
         {

@@ -1,4 +1,4 @@
-﻿using BaseDirectory;
+﻿using CommonClasses;
 using System.IO;
 using System.Security.Cryptography;
 
@@ -26,7 +26,7 @@ namespace AsymmetricEncryptionExercise.Encryptor
 
         public RSAXML(string path = "./Keys")
         {
-            baseDirectory = Base.GetBaseDirectoryWinFormat();
+            baseDirectory = BaseDirectory.GetBaseDirectoryWinFormat();
 
             dirpaths = new string[] {
                 baseDirectory + path + pubpath,

@@ -1,4 +1,4 @@
-﻿using BaseDirectory;
+﻿using CommonClasses;
 using Microsoft.Win32;
 using System;
 using System.ComponentModel;
@@ -119,7 +119,7 @@ namespace AsymmetricEncryptionExercise.Encryptor
             encryptCommand = new DelegateCommand(Encrypt);
             chooseFileCommand = new DelegateCommand(ChooseFile);
 
-            baseDirectory = Base.GetBaseDirectory();
+            baseDirectory = BaseDirectory.GetBaseDirectory();
 
             FileChoice = baseDirectory + fileName;
         }

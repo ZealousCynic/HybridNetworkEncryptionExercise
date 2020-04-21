@@ -56,7 +56,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="RSAXML.cs" />
-    <Compile Include="Printer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -99,9 +98,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BaseDirectory\BaseDirectory.csproj">
-      <Project>{7de833a6-7773-4bf3-8aeb-d0d4d4510bb9}</Project>
-      <Name>BaseDirectory</Name>
+    <ProjectReference Include="..\CommonClasses\CommonClasses.csproj">
+      <Project>{b8da5e9e-35ce-46e5-bd66-e8eb64460483}</Project>
+      <Name>CommonClasses</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
