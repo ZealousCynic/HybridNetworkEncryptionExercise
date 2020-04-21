@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using BaseDirectory;
+using Microsoft.Win32;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -200,7 +201,7 @@ namespace AsymmetricEncryptionExercise.Decryptor
             generateKeysCommand = new DelegateCommand(GenerateKeys);
             showKeyCommand = new DelegateCommand(ShowKey);
 
-            baseDirectory = BaseDirectory.GetBaseDirectory();
+            baseDirectory = Base.GetBaseDirectory();
 
             FileChoice = baseDirectory + fileName;
         }

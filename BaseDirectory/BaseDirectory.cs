@@ -1,8 +1,8 @@
 ﻿using System.IO;
 
-namespace AsymmetricEncryptionExercise.Decryptor
+namespace BaseDirectory
 {
-    public static class BaseDirectory
+    public class Base
     {
         static string baseDirectory = System.IO.Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\"));
         static string baseDirectoryWinFormat = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\");

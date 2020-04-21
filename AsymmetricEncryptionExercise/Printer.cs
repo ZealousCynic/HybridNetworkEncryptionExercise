@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using BaseDirectory;
+using System.IO;
 
 namespace AsymmetricEncryptionExercise.Encryptor
 {
@@ -7,7 +8,7 @@ namespace AsymmetricEncryptionExercise.Encryptor
         string baseDirectory = "";
         public Printer()
         {
-            baseDirectory = BaseDirectory.GetBaseDirectoryWinFormat();
+            baseDirectory = Base.GetBaseDirectoryWinFormat();
         }
         public void SaveToFile(string data, string name, string path = "./")
         {
