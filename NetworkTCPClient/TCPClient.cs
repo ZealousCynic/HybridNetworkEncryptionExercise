@@ -32,6 +32,7 @@ namespace NetworkTCPClient
                 stream = client.GetStream();
 
                 stream.Write(toSend, 0, toSend.Length);
+
             }
             catch (ArgumentNullException e)
             {
@@ -40,22 +41,22 @@ namespace NetworkTCPClient
             catch (SocketException e)
             {
                 Console.WriteLine("SocketException: {0}", e);
+            }
+            finally
+            {
+                stream.Close();
             }
         }
 
-        public string GetResponse()
+        public void SendMessage(byte[] message)
         {
-            string response = null;
-
             try
             {
-                if (client is null || client.Connected != true || stream is null || stream.DataAvailable != true)
-                    return "Client is not connected!";
+                client = new TcpClient(SERVERIP, PORTNR);
 
-                received = new byte[256];
+                stream = client.GetStream();
 
-                Int32 receivedBytes = stream.Read(received, 0, received.Length);
-                response = Encoding.ASCII.GetString(received);
+                stream.Write(message, 0, message.Length);
             }
             catch (ArgumentNullException e)
             {
@@ -65,8 +66,43 @@ namespace NetworkTCPClient
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
+            finally
+            {
+                stream.Close();
+            }
+        }
 
-            return response;
+        public string SendMessageGetResponse(byte[] message)
+        {
+            string responseData = null;
+
+            try
+            {
+                client = new TcpClient(SERVERIP, PORTNR);
+
+                stream = client.GetStream();
+
+                stream.Write(message, 0, message.Length);
+
+                byte[] data = new byte[256];
+
+                Int32 bytes = stream.Read(data, 0, data.Length);
+                responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+                Console.WriteLine("Received: {0}", responseData);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("ArgumentNullException: {0}", e);
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine("SocketException: {0}", e);
+            }
+            finally
+            {
+                stream.Close();
+            }
+            return responseData;
         }
 
         public void Disconnect()

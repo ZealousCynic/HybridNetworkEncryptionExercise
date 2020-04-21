@@ -38,8 +38,8 @@
     <Reference Include="CommonClasses, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonClasses.1.0.0\lib\netstandard2.0\CommonClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Encryption, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Encryption.1.0.0\lib\netstandard2.0\Encryption.dll</HintPath>
+    <Reference Include="Encryption, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Encryption.1.0.5\lib\netstandard2.0\Encryption.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
