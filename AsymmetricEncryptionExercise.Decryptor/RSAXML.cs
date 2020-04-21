@@ -31,7 +31,7 @@ namespace AsymmetricEncryptionExercise.Decryptor
         public byte[] DQ { get { return _priKey.DQ; } }
         public byte[] InverseQ { get { return _priKey.InverseQ; } }
 
-        public RSAXML(string path = ".")
+        public RSAXML(string path = "./Keys")
         {
             baseDirectory = Base.GetBaseDirectoryWinFormat();
 
@@ -72,10 +72,15 @@ namespace AsymmetricEncryptionExercise.Decryptor
                 Directory.CreateDirectory(path + pubpath);
                 Directory.CreateDirectory(path + pripath);
                 Directory.CreateDirectory(baseDirectory + path + pubpath);
+                Directory.CreateDirectory(baseDirectory + path + pripath);
 
+                //For project internal usage
                 File.WriteAllText(path + pubpath + pubname, rsa.ToXmlString(false));
                 File.WriteAllText(baseDirectory + path + pubpath + pubname, rsa.ToXmlString(false));
+
+                //For project external usage -- There is no difference in the files, only the paths.
                 File.WriteAllText(path + pripath + priname, rsa.ToXmlString(true));
+                File.WriteAllText(baseDirectory + path + pripath + priname, rsa.ToXmlString(true));
 
                 _priKey = rsa.ExportParameters(true);
             }

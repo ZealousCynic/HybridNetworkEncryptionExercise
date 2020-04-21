@@ -24,7 +24,7 @@ namespace AsymmetricEncryptionExercise.Encryptor
         public byte[] Modulus { get { return _pubKey.Modulus; } }
         public byte[] Exponent { get { return _pubKey.Exponent; } }
 
-        public RSAXML(string path = ".")
+        public RSAXML(string path = "./Keys")
         {
             baseDirectory = Base.GetBaseDirectoryWinFormat();
 
@@ -42,7 +42,7 @@ namespace AsymmetricEncryptionExercise.Encryptor
                 GetKey(baseDirectory + path);
         }
 
-        public RSAXML(byte[] modulus, byte[] exponent, string path = ".") : this(path)
+        public RSAXML(byte[] modulus, byte[] exponent, string path = "./Keys") : this(path)
         {
             _pubKey.Modulus = modulus;
             _pubKey.Exponent = exponent;

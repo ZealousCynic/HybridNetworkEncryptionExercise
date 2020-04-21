@@ -249,7 +249,7 @@ namespace AsymmetricEncryptionExercise.Decryptor
             if (rsaxml is null)
                 rsaxml = new RSAXML();
 
-            rsaxml.GenerateKeyToXML(".");
+            rsaxml.GenerateKeyToXML("./Keys");
 
             NewKeys = "Success";
         }
