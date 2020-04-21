@@ -35,12 +35,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonClasses">
-      <HintPath>..\..\CommonClasses\CommonClasses\bin\Release\netstandard2.0\CommonClasses.dll</HintPath>
+    <Reference Include="CommonClasses, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonClasses.1.0.0\lib\netstandard2.0\CommonClasses.dll</HintPath>
     </Reference>
     <Reference Include="Encryption, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Encryption\Encryption\bin\Release\netstandard2.0\Encryption.dll</HintPath>
+      <HintPath>..\packages\Encryption.1.0.0\lib\netstandard2.0\Encryption.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -94,6 +93,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
