@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BB431BB9-5CA3-4BC2-BD7A-DD0E22F694D1}</ProjectGuid>
+    <ProjectGuid>{D2BFA29F-F9AB-48C9-B803-3D928E820B32}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>NetworkTCPServer</RootNamespace>
-    <AssemblyName>NetworkTCPServer</AssemblyName>
+    <RootNamespace>NetworkTCPClient</RootNamespace>
+    <AssemblyName>NetworkTCPClient</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -45,16 +45,10 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TCPServer.cs" />
+    <Compile Include="TCPClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BaseDirectory\BaseDirectory.csproj">
-      <Project>{7de833a6-7773-4bf3-8aeb-d0d4d4510bb9}</Project>
-      <Name>BaseDirectory</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
